@@ -6,7 +6,7 @@
 //  Copyright © 2018 Skorulis. All rights reserved.
 //
 
-import UIKit
+import SKSwiftLib
 
 public enum TerrainType: String, Codable {
     case grass
