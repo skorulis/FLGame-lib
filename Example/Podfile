@@ -1,0 +1,11 @@
+use_frameworks!
+
+target 'FLGame_Example' do
+  pod 'FLGame', :path => '../'
+
+  target 'FLGame_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
