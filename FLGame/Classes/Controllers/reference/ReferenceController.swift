@@ -168,7 +168,8 @@ public class ReferenceController {
     
     public class func readReferenceObjects<T: Decodable>(filename:String) -> [T] {
         do {
-            let path = Bundle.main.path(forResource: filename, ofType: "json")!
+            let bundle = Bundle.init(for: self)
+            let path = bundle.path(forResource: filename, ofType: "json")!
             let data = try Data(contentsOf: URL(fileURLWithPath: path))
             let decoder = JSONDecoder()
             let objects = try decoder.decode([T].self, from: data)
