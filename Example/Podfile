@@ -1,7 +1,9 @@
 use_frameworks!
+platform :ios, '10.0'
 
 target 'FLGame_Example' do
   pod 'FLGame', :path => '../'
+  pod 'SKSwiftLib', :path => '~/dev/ios/SKLibs/SKSwiftLib'
 
   target 'FLGame_Tests' do
     inherit! :search_paths
