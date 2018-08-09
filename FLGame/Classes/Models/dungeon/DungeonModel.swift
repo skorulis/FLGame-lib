@@ -11,23 +11,26 @@ import GameplayKit
 
 public class DungeonModel: NSObject {
     
-    public var player:PlayerCharacterModel
-    public var playerNode:DungeonCharacterEntity
+    public var player:PlayerCharacterModel?
+    public var playerNode:DungeonCharacterEntity?
     
     public var nodes:[GKHexMapNode] = []
     public var width:Int
     public var height:Int
     public var graph:GKGraph
+    public var overlandOffset:SCNVector3 = SCNVector3(0,0,0)
     
     public var size:vector_int2 {
         return vector_int2(Int32(width),Int32(height))
     }
     
-    public init(width:Int,height:Int,baseTerrain:TerrainReferenceModel,player:PlayerCharacterModel) {
+    public init(width:Int,height:Int,baseTerrain:TerrainReferenceModel,player:PlayerCharacterModel?) {
         self.width = width
         self.height = height
         self.player = player
-        self.playerNode = DungeonCharacterEntity(char:self.player.base)
+        if let p = player {
+            self.playerNode = DungeonCharacterEntity(char:p.base)
+        }
         
         for y in 0..<height {
             for x in 0..<width {
@@ -98,6 +101,13 @@ public class DungeonModel: NSObject {
     public func fixture(at:CGPoint) -> DungeonTileType? {
         let node = self.nodeAt(point: at)
         return node?.fixture?.type
+    }
+    
+    public func path(to:vector_int2,from:vector_int2) -> [GKHexMapNode] {
+        guard let node = self.nodeAt(vec: to) else { return [] }
+        guard let fromNode = self.nodeAt(vec: from) else { return [] }
+        
+        return graph.findPath(from: fromNode, to: node) as! [GKHexMapNode]
     }
     
     public func path(to:CGPoint,from:CGPoint) -> [GKHexMapNode] {

@@ -19,7 +19,7 @@ public class DungeonGenerator {
     public let size:Int
     public let ref:ReferenceController
     
-    public init(size:Int,ref:ReferenceController,player:PlayerCharacterModel) {
+    public init(size:Int,ref:ReferenceController,player:PlayerCharacterModel?) {
         self.ref = ref
         let baseTerrain = ref.getTerrain(type: .grass)
         
@@ -38,6 +38,7 @@ public class DungeonGenerator {
         dungeon.updateConnectionGraph()
         if (type == .outdoors) {
             makeCircular()
+            dungeon.playerNode?.gridPosition = vector_int2(Int32(size/2), Int32(size/2))
         }
         
         return dungeon
@@ -58,7 +59,7 @@ public class DungeonGenerator {
             addRoom()
         }
         for _ in 0...2 {
-            dungeon.playerNode.gridPosition = addStairs(up: true)
+            dungeon.playerNode?.gridPosition = addStairs(up: true)
         }
         for _ in 0...2 {
             _ = addStairs(up: false)
