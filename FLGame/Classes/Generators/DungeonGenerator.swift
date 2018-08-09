@@ -38,7 +38,9 @@ public class DungeonGenerator {
         dungeon.updateConnectionGraph()
         if (type == .outdoors) {
             makeCircular()
-            dungeon.playerNode?.gridPosition = vector_int2(Int32(size/2), Int32(size/2))
+            let centre = vector_int2(Int32(size/2), Int32(size/2))
+            dungeon.playerNode?.gridPosition = centre
+            dungeon.nodeAt(vec: centre)?.fixture = ref.getDungeonTile(type: .teleporter)
         }
         
         return dungeon

@@ -12,6 +12,7 @@ public enum DungeonTileType:String {
     case wall = "wall"
     case stairsUp = "stair-up"
     case stairsDown = "stair-down"
+    case teleporter
 }
 
 public enum DungeonAction: String {
