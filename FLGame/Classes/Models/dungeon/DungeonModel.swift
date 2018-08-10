@@ -6,7 +6,6 @@
 //  Copyright © 2018 Skorulis. All rights reserved.
 //
 
-import SpriteKit
 import GameplayKit
 
 public class DungeonModel: NSObject {
